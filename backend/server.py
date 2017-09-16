@@ -2,7 +2,9 @@ from flask import Flask, url_for, json, request, Response
 import nmap # import nmap.py module
 from multiprocessing import Process
 import subprocess
+import manuf
 
+mac_parser = manuf.MacParser()
 devices = {}
 class processClass:
 
@@ -11,6 +13,14 @@ class processClass:
         p = Process(target=self.scan, args=())
         p.daemon = True                       # Daemonize it
         p.start()                             # Start the execution
+
+def mac_to_string(mac):
+    ret = ""
+    if mac_parser.get_manuf(mac) is not None:
+        ret = ret + str(mac_parser.get_manuf(mac))
+    if mac_parser.get_comment(mac) is not None:
+        ret = ret + str(mac_parser.get_comment(mac))
+    return ret
 
 def scan():
     #nmap scan
@@ -32,17 +42,26 @@ def scan():
 
     hosts_list = [ nm[x] for x in nm.all_hosts()]
     for host in hosts_list:
-        update = {"ip": "", "mac": "", "name": "name", "online": False }
+        update = {"ip": "", "mac": "", "name": "", "online": False }
         if host['status']['state']== 'up':
             update["online"]=True
         else:
             update['online']=False
+
         for name in host['hostnames']:
-           update['name']=  name['name']
+            print name
+            if len(name['name'])> len(update['name']):
+                #for some weird reason nmap returns a list of names. We pick the longest
+                update['name']=  name['name']
+        print update['name']
         ip = host['addresses']['ipv4']
         update['ip']=ip
         if ip in ips:
             update['mac']=ips[ip][1]
+            update['mac_description'] = mac_to_string(update['mac'])
+            if len(update['name'])==0:
+                #if there is no hostname, we fall back on the MAC manufacturer
+                update['name']=update['mac_description']
         update_host_info(update)
 
 
@@ -122,10 +141,10 @@ def is_online(device_id):
 ##scan devices
 @app.route('/scan', methods=['POST'])
 def start_scan():
-
+    scan()
     try:
         #begin = processClass()
-        scan()
+        print ""#scan()
     except :
         return "Scan failed"
 
