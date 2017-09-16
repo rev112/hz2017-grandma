@@ -6,22 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = ' NastyMa';
-
-  
+  title = ' NASTYMA';
 
 
   devices = [
-            {name:'AVM FRITZ Box'},
-            {name:'Nokia Body Connected Scale'},
-            {name:'Philips Hue Bridge'},
-            {name:'Philips Hue Lightstrips'},
-            {name:'Beurer BY'},
-            {name:'Smart Plug'},
-            {name:'Smart-Home-Camera'},
-            {name:'Devolo Home Control'},
-            {name:'IP-Cam'}
+            
+            {name:'Nokia Body Connected Scale',online:false,secure:0},
+            {name:'Philips Hue Lightstrips',online:true,secure:0},
+            {name:'Smart-Home-Camera',online:true,secure:0},
+            {name:'Devolo Home Control',online:true,secure:0},
+            {name:'IP-Cam',online:true,secure:0}
           ];
 }
+
+  
 
 

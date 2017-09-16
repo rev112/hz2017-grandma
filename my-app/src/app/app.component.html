@@ -1,27 +1,37 @@
-<!--The content below is only a placeholder and can be replaced.-->
 
 
 <div style="text-align:center">
   
   
-  <img width="100 px" src="assets/nastyma.png">
-  <h2>Available Devices</h2>
-  <md-list *ngFor="let device of devices;">
-    
+  <img class=" z-depth-5 " width="100 px" src="assets/nastyma.png">
+  <h4>Available Devices</h4>
 
   
-        <md-list-item>{{device.name}}</md-list-item>
-     
-
-  </md-list>
-
-
-
-  
+      
+ 
+      
+  <div class="card-panel grey lighten-2 ">
+      
+          <md-list *ngFor="let device of devices;" >
+            <md-list-item class=" z-depth-5 " [ngClass]="{'green':(device.online),'red':(!device.online)}"><h6 class="white-text">{{device.name}}</h6></md-list-item>
+          </md-list>
+</div>
 </div>
 
 
 
 
 
-                                                                                                  
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<footer class="page-footer white" style="text-align:center">
+    
+    <a class="waves-effect waves-light orange darken-3 btn rounded pulse"><i class="material-icons">search</i> SEARCH</a>
+    
+    
+  </footer>
+      
+
+
+
