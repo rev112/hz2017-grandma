@@ -209,10 +209,8 @@ def update_host_info(update):
         print devices
         print 'added device'
 
-
-
-
-
 if __name__ == '__main__':
-    #processClass()
-    app.run(threaded=False )
+    import ssl
+    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    context.load_cert_chain('certs/crt.pem', 'certs/key.pem')
+    app.run(threaded=False, ssl_context=context)

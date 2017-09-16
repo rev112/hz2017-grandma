@@ -6,6 +6,6 @@ setup(
     long_description=__doc__,
     include_package_data=True,
     zip_safe=False,
-    install_requires=['Flask', 'python-nmap']
+    install_requires=['Flask', 'python-nmap', 'pyopenssl']
 
 )
