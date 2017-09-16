@@ -72,9 +72,9 @@ def api_root():
 
 # get device list     curl -i -H "Accept: application/json" "http://127.0.0.1:5000/devices"
 @app.route('/devices' , methods = ['GET'])
-def api_articles():
+def all_deices():
     print devices
-    return  Response(json.dumps(devices), status=200, mimetype='application/json')
+    return  Response(json.dumps(devices.values()), status=200, mimetype='application/json')
 
 
 @app.route('/devices/<device_id>', methods=['GET'])
