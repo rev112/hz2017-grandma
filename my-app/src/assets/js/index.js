@@ -38,6 +38,18 @@ $(document).ready(function() {
       if (!state_found) {
         state_found = true;
         console.log('Status changed: visible')
+
+        // Run AJAX query to get the device information
+        var url = '/devices/' + mid_num;
+        $.ajax({
+          type: "GET",
+          contentType: "application/json",
+          url: url,
+          success: function(response){
+            console.log('AJAX query: success');
+          },
+          error: function(response){}
+        });
       }
     }
     else {
