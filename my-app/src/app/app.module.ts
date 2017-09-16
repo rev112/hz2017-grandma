@@ -36,7 +36,16 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import {Component} from '@angular/core';
+import { ArComponent } from './ar.component';
+
+import { RouterModule, Routes } from '@angular/router';
+
+import { Component } from '@angular/core';
+
+const appRoutes: Routes = [
+  { path: '/', component: ArComponent },
+  { path: '/list', component: AppComponent }
+];
 
 
 @NgModule({
@@ -74,12 +83,13 @@ import {Component} from '@angular/core';
     MdTableModule,
     MdTabsModule,
     MdToolbarModule,
-    MdTooltipModule
+    MdTooltipModule,
+
+    // RouterModule.forRoot(
+    //   appRoutes
+    // )
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-
