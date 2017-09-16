@@ -1,1 +1,9 @@
 .idea
+backend/iot_scanner_Backend.egg-info/*
+backend/dist/iot_scanner_Backend-1.0-py2.7.egg
+backend/iot_scanner_Backend.egg-info/PKG-INFO
+backend/iot_scanner_Backend.egg-info/SOURCES.txt
+backend/iot_scanner_Backend.egg-info/dependency_links.txt
+backend/iot_scanner_Backend.egg-info/not-zip-safe
+backend/iot_scanner_Backend.egg-info/requires.txt
+backend/iot_scanner_Backend.egg-info/top_level.txt
