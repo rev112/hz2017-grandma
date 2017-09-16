@@ -50,9 +50,11 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ArComponent
   ],
   imports: [
+
     BrowserModule,
     MdAutocompleteModule,
     MdButtonModule,
@@ -90,6 +92,6 @@ const appRoutes: Routes = [
     // )
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ArComponent]
 })
 export class AppModule { }
