@@ -31,6 +31,11 @@ import {
   MdTooltipModule
  } from '@angular/material';
 
+import { DeviceService } from '../app/device.service';
+
+import { HttpModule } from '@angular/http';
+
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -57,7 +62,7 @@ const appRoutes: Routes = [
     MainComponent
   ],
   imports: [
-
+    HttpModule,
     BrowserModule,
     MdAutocompleteModule,
     MdButtonModule,
@@ -94,7 +99,7 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  providers: [],
+  providers: [DeviceService],
   bootstrap: [MainComponent]
 })
 export class AppModule { }

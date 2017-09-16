@@ -1,10 +1,55 @@
-from flask import Flask, url_for, json, request, Response
+from flask import Flask, url_for, json, request, Response, make_response
 import nmap # import nmap.py module
 from multiprocessing import Process
 import subprocess
 import manuf
 
 mac_parser = manuf.MacParser()
+from datetime import timedelta
+
+from functools import update_wrapper
+
+def crossdomain(origin=None, methods=None, headers=None,
+                max_age=21600, attach_to_all=True,
+                automatic_options=True):
+    if methods is not None:
+        methods = ', '.join(sorted(x.upper() for x in methods))
+    if headers is not None and not isinstance(headers, str):
+        headers = ', '.join(x.upper() for x in headers)
+    if not isinstance(origin, str):
+        origin = ', '.join(origin)
+    if isinstance(max_age, timedelta):
+        max_age = max_age.total_seconds()
+
+    def get_methods():
+        if methods is not None:
+            return methods
+
+        options_resp = app.make_default_options_response()
+        return options_resp.headers['allow']
+
+    def decorator(f):
+        def wrapped_function(*args, **kwargs):
+            if automatic_options and request.method == 'OPTIONS':
+                resp = app.make_default_options_response()
+            else:
+                resp = make_response(f(*args, **kwargs))
+            if not attach_to_all and request.method != 'OPTIONS':
+                return resp
+
+            h = resp.headers
+
+            h['Access-Control-Allow-Origin'] = origin
+            h['Access-Control-Allow-Methods'] = get_methods()
+            h['Access-Control-Max-Age'] = str(max_age)
+            if headers is not None:
+                h['Access-Control-Allow-Headers'] = headers
+            return resp
+
+        f.provide_automatic_options = False
+        return update_wrapper(wrapped_function, f)
+    return decorator
+
 devices = {}
 class processClass:
 
@@ -90,13 +135,15 @@ def api_root():
     return 'Welcome'
 
 # get device list     curl -i -H "Accept: application/json" "http://127.0.0.1:5000/devices"
-@app.route('/devices' , methods = ['GET'])
+@app.route('/devices' , methods = ['GET', 'ORIGIN'])
+@crossdomain(origin='*',headers='Content-Type')
 def all_deices():
     print devices
     return  Response(json.dumps(devices.values()), status=200, mimetype='application/json')
 
 
-@app.route('/devices/<device_id>', methods=['GET'])
+@app.route('/devices/<device_id>', methods=['GET', 'ORIGIN'])
+@crossdomain(origin='*',headers='Content-Type')
 def get_device(device_id):
     if device_id in devices:
         return Response(json.dumps(devices[device_id]), status=200, mimetype='application/json')
@@ -105,7 +152,8 @@ def get_device(device_id):
 
 
 #curl -d '{"ip": "127.0.0.13"}' -X POST  -H "Content: application/json"  http://127.0.0.1:5000/devices/new
-@app.route('/devices/new', methods=['POST'])
+@app.route('/devices/new', methods=['POST', 'ORIGIN'])
+@crossdomain(origin='*',headers='Content-Type')
 def add_device():
 #check if device already present
     update_host_info({'ip': '192.168.178.23', 'mac': '00:14:22:01:23:45', 'name': 'KPs-iPhone.fritz.box', 'online': True})
@@ -121,7 +169,8 @@ def add_device():
     return Response(json.dumps(devices), status=200, mimetype='application/json')
 
 #curl   http://127.0.0.1:5000/devices/1/online
-@app.route('/devices/<device_id>/online', methods=['GET'])
+@app.route('/devices/<device_id>/online', methods=['GET', 'ORIGIN'])
+@crossdomain(origin='*',headers='Content-Type')
 def is_online(device_id):
 #check if device online
     if device_id in devices:
@@ -139,7 +188,8 @@ def is_online(device_id):
 
 
 ##scan devices
-@app.route('/scan', methods=['POST'])
+@app.route('/scan', methods=['POST', 'ORIGIN'])
+@crossdomain(origin='*',headers='Content-Type')
 def start_scan():
     scan()
     try:

@@ -1,0 +1,7 @@
+setup.py
+iot_scanner_Backend.egg-info/PKG-INFO
+iot_scanner_Backend.egg-info/SOURCES.txt
+iot_scanner_Backend.egg-info/dependency_links.txt
+iot_scanner_Backend.egg-info/not-zip-safe
+iot_scanner_Backend.egg-info/requires.txt
+iot_scanner_Backend.egg-info/top_level.txt
