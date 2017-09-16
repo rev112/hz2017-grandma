@@ -1,4 +1,6 @@
 #!/usr/bin/env python2
+# SimpleHTTPServer flavoured with ssl
+# Thanks to https://gist.github.com/rozifus/c529caf170699f117c53
 import os
 import ssl
 import sys
