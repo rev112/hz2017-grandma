@@ -1,3 +1,7 @@
+
+# Run it
+ng serve --host 0.0.0.0 --ssl true --ssl-cert assets/cert.pem --ssl-key assets/key.pem
+
 # MyApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.2.
