@@ -36,6 +36,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
+import { MainComponent } from './main.component';
+
 import { ArComponent } from './ar.component';
 
 import { RouterModule, Routes } from '@angular/router';
@@ -43,15 +45,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { Component } from '@angular/core';
 
 const appRoutes: Routes = [
-  { path: '/', component: ArComponent },
-  { path: '/list', component: AppComponent }
+  { path: '', component: ArComponent },
+  { path: 'list', component: AppComponent }
 ];
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ArComponent
+    ArComponent,
+    MainComponent
   ],
   imports: [
 
@@ -87,11 +90,11 @@ const appRoutes: Routes = [
     MdToolbarModule,
     MdTooltipModule,
 
-    // RouterModule.forRoot(
-    //   appRoutes
-    // )
+    RouterModule.forRoot(
+      appRoutes
+    )
   ],
   providers: [],
-  bootstrap: [ArComponent]
+  bootstrap: [MainComponent]
 })
 export class AppModule { }

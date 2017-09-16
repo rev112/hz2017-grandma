@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-list',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -10,7 +10,7 @@ export class AppComponent {
 
 
   devices = [
-            
+
             {name:'Nokia Body Connected Scale',online:false,secure:0},
             {name:'Philips Hue Lightstrips',online:true,secure:0},
             {name:'Smart-Home-Camera',online:true,secure:0},
@@ -18,7 +18,3 @@ export class AppComponent {
             {name:'IP-Cam',online:true,secure:0}
           ];
 }
-
-  
-
-
