@@ -8,7 +8,7 @@ import BaseHTTPServer
 import SimpleHTTPServer
 
 CURRENT_DIR = os.path.dirname(__file__)
-DIR_TO_SERVE = os.path.join(CURRENT_DIR, 'html')
+DIR_TO_SERVE = os.path.join(CURRENT_DIR, '..', 'my-app', 'src', 'assets')
 
 if len(sys.argv) > 1:
     host, port = sys.argv[1].split(':')
