@@ -156,7 +156,12 @@ def get_device(device_id):
 @crossdomain(origin='*',headers='Content-Type')
 def add_device():
 #check if device already present
-    update_host_info({'ip': '192.168.178.23', 'mac': '00:14:22:01:23:45', 'name': 'KPs-iPhone.fritz.box', 'online': True})
+    update_host_info({'ip': '192.168.178.23', 'mac': '00:14:22:01:23:45', 'name': 'AVM FRITZ!Box 5490', 'online': True})
+    update_host_info({'ip': '192.168.178.24', 'mac': '06:14:22:01:23:46', 'name': 'Philips Hue Bridge', 'online': True})
+    update_host_info({'ip': '192.168.178.25', 'mac': '03:14:22:01:23:45', 'name': 'Nokia Body', 'online': False})
+    update_host_info({'ip': '192.168.178.28', 'mac': '03:15:22:01:23:45', 'name': 'Smart-me Smart Plug', 'online': False})
+    update_host_info({'ip': '192.168.178.29', 'mac': '03:19:22:01:23:45', 'name': 'Piper Classic', 'online': False})
+
 
     '''new_device= request.json
     if device_id in devices:
@@ -213,4 +218,4 @@ if __name__ == '__main__':
     import ssl
     context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
     context.load_cert_chain('certs/crt.pem', 'certs/key.pem')
-    app.run(threaded=False, ssl_context=context)
+    app.run(threaded=False, debug=True,  ssl_context=context)
