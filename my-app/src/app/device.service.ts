@@ -15,7 +15,7 @@ export class DeviceService {
   getDevices(): Observable<Device[]> {
 
     return this.http
-      .get("http://localhost:5000/devices",new Headers({'Content-Type': 'application/json'}))
+      .get("https://localhost:5000/devices",new Headers({'Content-Type': 'application/json'}))
       .map((response: Response) => {
         console.log(response)
         if(response.ok) {
@@ -31,7 +31,7 @@ export class DeviceService {
 
   getDevice(id: number): Observable<Device> {
     return this.http
-      .get("http://localhost:5000/devices/" + id,new Headers({'Content-Type': 'application/json'}))
+      .get("https://localhost:5000/devices/" + id,new Headers({'Content-Type': 'application/json'}))
       .map((response: Response) => {
         if(response.ok) {
           return TypedJSON.parse(response.text(), Device);

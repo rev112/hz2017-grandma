@@ -37,10 +37,10 @@ $(document).ready(function() {
       console.log('Marker found: ' + mid_num);
       if (!state_found) {
         state_found = true;
-        console.log('Status changed: visible')
+        console.log('Status changed: visible');
 
         // Run AJAX query to get the device information
-        var url = '/devices/' + mid_num;
+        var url = 'https://localhost:5000/devices/a/' + mid_num;
         $.ajax({
           type: "GET",
           contentType: "application/json",
